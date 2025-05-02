@@ -72,6 +72,8 @@ export const login = async (req, res, next) => {
     res
       .cookie("accessToken", token, {
         httpOnly: true,
+        sameSite: 'none',  // Add this for cross-site requests
+        secure: true,      // Required with sameSite: 'none'
       })
       .status(200)
       .send(info);
