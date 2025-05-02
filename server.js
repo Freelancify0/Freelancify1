@@ -37,8 +37,6 @@ const connect = async () => {
     console.error("MongoDB connection error:", error);
   }
 };
-// Fixed for ES Modules
-// Add this to your server.js file
 
 /**
  * Environment Variable Check for GitHub OAuth
@@ -91,21 +89,10 @@ checkGitHubConfig();
   
 // Export for ES modules
 export { checkGitHubConfig };
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Origin", "https://freelancify-swart.vercel.app/");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  
-  next();
-});
-// app.use("/api/github", githubOauthRoute);
+
+// Use a single cors middleware configuration
 app.use(cors({
-  origin: "https://freelancify-pzti.onrender.com/",
+  origin: ["https://freelancify-swart.vercel.app", "https://freelancify-pzti.onrender.com"], // No trailing slashes
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"]
