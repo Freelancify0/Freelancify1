@@ -6,6 +6,7 @@ import userRoute from "./routes/user.route.js";
 import gigRoute from "./routes/gig.route.js";
 import orderRoute from "./routes/order.route.js";
 import conversationRoute from "./routes/conversation.route.js";
+// import githubRoutes from "./routes/github.route.js";
 
 import messageRoute from "./routes/message.route.js";
 import reviewRoute from "./routes/review.route.js";
@@ -96,13 +97,6 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"]
 }));
-
-// Add these headers to handle COOP and COEP
-app.use((req, res, next) => {
-  // Set COOP to allow popups
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
-  next();
-});
 
 app.use(express.json());
 app.use(cookieParser());
